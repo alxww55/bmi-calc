@@ -16,7 +16,15 @@ def main(page: ft.Page):
             weight = float(input_weight.value)
             height = float(input_height.value) / 100
             bmi = weight / (height ** 2)
-            result_text.value = f"Your BMI is: {bmi:.1f}"
+            page.update()
+            if bmi < 18.5:
+                result_text.value = f"Your BMI is {bmi:.1f}. You are underweight!"
+            elif bmi < 24.9:
+                result_text.value = f"Your BMI is {bmi:.1f}. You are normal weight!"
+            elif bmi < 29.9:
+                result_text.value = f"Your BMI is {bmi:.1f}. You are overweight!"
+            else:
+                result_text.value = f"Your BMI is {bmi:.1f}. You are obese!"
         except ValueError:
             result_text.value = "Please enter valid numbers!"
         page.update()
