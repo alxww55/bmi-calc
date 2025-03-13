@@ -5,8 +5,7 @@ def main(page: ft.Page):
     input_weight = ft.TextField(hint_text="Enter your weight (kg)")
     input_height = ft.TextField(hint_text="Enter your height (cm)")
     result_text = ft.Text("")
-    
-
+    page.window.bgcolor = '#222222'
     page.window.height = 350
     page.window.width = 450
     page.window.alignment = ft.alignment.center
@@ -29,7 +28,25 @@ def main(page: ft.Page):
             result_text.value = "Please enter valid numbers!"
         page.update()
     
-    calculate_button = ft.FilledButton("Calculate", on_click=calculate_bmi, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)))
+    def button_on_hover(data):
+        if data == True:
+            calculate_button.bgcolor = '#175191'
+            calculate_button.color = '#eefaff'
+            calculate_button.icon_color = '#eefaff'
+        else:
+            calculate_button.bgcolor = '#1560bd'
+            calculate_button.color = '#ffffff'
+            calculate_button.icon_color = '#ffffff'
+        page.update()
+    
+    calculate_button = ft.FilledButton("Calculate", 
+                                       on_click=calculate_bmi, 
+                                       on_hover=button_on_hover, 
+                                       style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)), 
+                                       bgcolor='#1560bd', 
+                                       color='#ffffff',
+                                       icon=ft.Icons.CALCULATE,
+                                       icon_color='#ffffff')
 
     # page.add(input_weight, input_height)
     page.add(
@@ -64,4 +81,4 @@ def main(page: ft.Page):
     
     page.update()
 
-ft.app(main)
+ft.app(main, assets_dir="assets")
